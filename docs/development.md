@@ -1,8 +1,8 @@
 # Desenvolvimento
 
-## Loops
+## Estado do desenvolvimento
 
-O projeto usa loops incrementais. O Loop 2 registra uma aba nativa do itemtype `Ticket` usando `addtabon`, `getTabNameForItem()` e `displayTabContentForItem()`. CRUD, associação e execução ficam para loops posteriores.
+O projeto usa loops incrementais. A versão atual registra uma aba nativa do itemtype `Ticket` usando `addtabon`, `getTabNameForItem()` e `displayTabContentForItem()`. CRUD, associação manual, execução, progresso, auditoria e reordenação já estão implementados.
 
 ## Padrões
 

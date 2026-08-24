@@ -1,10 +1,9 @@
 # Permissões
 
-O MVP deverá integrar o sistema de Profiles/Rights do GLPI, sem usuários ou ACLs próprias. A proposta de direitos é:
+O plugin usa o sistema de Profiles/Rights do GLPI, sem usuários ou ACLs próprias. O estado atual é:
 
-- visualizar procedimentos;
-- executar procedimentos;
-- associar procedimentos;
-- gerenciar procedimentos.
+- administração de procedimentos: direito nativo `config` com `UPDATE`;
+- execução, associação, reordenação e atualização de detalhes: permissão de atualização do chamado (`Ticket::canUpdateItem()`);
+- visualização: usuários autenticados que tenham acesso ao chamado.
 
-No Loop 1 esses direitos ainda não são registrados porque não existe tela ou itemtype executável. O próximo loop deverá criar a classe de Profile/Rights e inicializar direitos com as APIs nativas, mantendo acesso mínimo por padrão.
+Uma classe de direito específica para separar administração, associação e execução continua sendo uma melhoria futura.

@@ -1,6 +1,6 @@
 # Banco de dados
 
-O Loop 1 cria quatro tabelas normalizadas, sem dados iniciais:
+A versão atual cria cinco tabelas normalizadas:
 
 | Tabela | Papel |
 | --- | --- |

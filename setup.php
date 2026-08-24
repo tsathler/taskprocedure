@@ -22,8 +22,8 @@ define('PLUGIN_TASKPROCEDURE_MAX_GLPI', '11.0.99');
 /**
  * Initialize the plugin hooks.
  *
- * Loop 1 intentionally registers no UI or Ticket hooks. Later loops will add
- * those integrations without changing the installation contract.
+ * The plugin registers the native Ticket tab and the JavaScript enhancement
+ * while keeping the installation contract in hook.php.
  */
 function plugin_init_taskprocedure(): void
 {

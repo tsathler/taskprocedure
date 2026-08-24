@@ -4,7 +4,15 @@ Plugin para GLPI 11 destinado a procedimentos e checklists reutilizáveis em cha
 
 ## Estado atual
 
-O repositório contém o CRUD administrativo de procedimentos e etapas, além da aba nativa no Ticket. Associação e execução do checklist ainda serão implementadas nos próximos loops.
+O plugin contém o CRUD administrativo de procedimentos e etapas, associação manual a chamados e execução de checklists na aba nativa do Ticket. A versão atual inclui progresso, conclusão por etapa, comentários, evidências textuais, reordenação e histórico de alterações.
+
+## Estado atual
+
+- Versão: `0.4.1`.
+- Evidência é armazenada como texto ou link; upload de arquivos ainda não faz parte do plugin.
+- O acesso administrativo usa o direito nativo `config` do GLPI.
+- A execução da checklist usa o direito de atualização do chamado (`canUpdateItem()`).
+- O histórico está persistido no banco, mas ainda não possui uma tela própria de consulta.
 
 ## Instalação de desenvolvimento
 

@@ -112,7 +112,6 @@ class PluginTaskprocedureTicketProcedure extends CommonDBTM
                         . (int) $assignment['id'] . '">'
                         . '<input type="hidden" name="ticketstep_id" value="' . (int) $step['id'] . '">'
                         . '<input type="hidden" name="update_step" value="1">'
-                        . '<input type="hidden" name="ajax" value="1">'
                         . '<input class="form-check-input mt-1" type="checkbox" name="is_completed" value="1"'
                         . ((int) $step['is_completed'] === 1 ? ' checked' : '')
                         . ' data-taskprocedure-checklist onchange="this.form.requestSubmit()" aria-label="'

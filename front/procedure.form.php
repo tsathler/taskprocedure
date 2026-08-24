@@ -11,8 +11,6 @@ $procedure = new PluginTaskprocedureProcedure();
 $id = (int) ($_GET['id'] ?? $_POST['id'] ?? 0);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    Session::checkCSRF($_POST);
-
     if (isset($_POST['delete'])) {
         $procedure->getFromDB($id);
         $step = new PluginTaskprocedureProcedureStep();
@@ -53,7 +51,8 @@ echo '<div class="card-header"><div class="card-title h3">'
 echo '<div class="card-body">';
 echo '<form method="post" action="procedure.form.php' . ($id > 0 ? '?id=' . $id : '') . '">';
 echo Html::hidden('id', ['value' => $id]);
-echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]);
+echo '<input type="hidden" name="_glpi_csrf_token" value="'
+    . htmlescape(Session::getNewCSRFToken()) . '">';
 echo '<div class="mb-3"><label class="form-label" for="name">' . __s('Nome', 'taskprocedure') . '</label>';
 echo Html::input('name', ['id' => 'name', 'value' => $procedure->fields['name'] ?? '', 'required' => true]);
 echo '</div>';
@@ -95,7 +94,8 @@ if ($id > 0) {
 
     echo '<form class="mt-3" method="post" action="procedure.form.php?id=' . $id . '">'
         . Html::hidden('id', ['value' => $id])
-        . Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()])
+        . '<input type="hidden" name="_glpi_csrf_token" value="'
+        . htmlescape(Session::getNewCSRFToken()) . '">'
         . '<button class="btn btn-danger" type="submit" name="delete" value="1">'
         . __s('Excluir procedimento', 'taskprocedure') . '</button></form>';
 }

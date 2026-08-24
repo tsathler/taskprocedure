@@ -22,8 +22,6 @@ if (!$procedure->getFromDB($procedureId)) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    Session::checkCSRF($_POST);
-
     if (isset($_POST['delete'])) {
         $step->delete(['id' => $id], true);
         Html::redirect('procedure.form.php?id=' . $procedureId);
@@ -54,7 +52,8 @@ echo '<div class="center"><div class="card"><div class="card-header"><div class=
 echo '<form method="post" action="step.form.php' . ($id > 0 ? '?id=' . $id : '?procedure_id=' . $procedureId) . '">';
 echo Html::hidden('id', ['value' => $id]);
 echo Html::hidden('plugin_taskprocedure_procedures_id', ['value' => $procedureId]);
-echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]);
+echo '<input type="hidden" name="_glpi_csrf_token" value="'
+    . htmlescape(Session::getNewCSRFToken()) . '">';
 echo '<div class="mb-3"><label class="form-label" for="name">' . __s('Nome', 'taskprocedure') . '</label>'
     . Html::input('name', ['id' => 'name', 'value' => $step->fields['name'] ?? '', 'required' => true]) . '</div>';
 echo '<div class="mb-3"><label class="form-label" for="description">' . __s('Descrição', 'taskprocedure') . '</label>'
@@ -72,7 +71,8 @@ if ($id > 0) {
     echo '<form class="mt-3" method="post" action="step.form.php?id=' . $id . '">'
         . Html::hidden('id', ['value' => $id])
         . Html::hidden('plugin_taskprocedure_procedures_id', ['value' => $procedureId])
-        . Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()])
+        . '<input type="hidden" name="_glpi_csrf_token" value="'
+        . htmlescape(Session::getNewCSRFToken()) . '">'
         . '<button class="btn btn-danger" type="submit" name="delete" value="1">'
         . __s('Excluir etapa', 'taskprocedure') . '</button></form>';
 }

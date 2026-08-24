@@ -16,7 +16,14 @@ class PluginTaskprocedureTicketProcedure extends CommonDBTM
             return '';
         }
 
-        return [1 => __s('Procedimentos', 'taskprocedure')];
+        return [
+            1 => self::createTabEntry(
+                __s('Procedimentos', 'taskprocedure'),
+                0,
+                Ticket::class,
+                'ti ti-list-check',
+            ),
+        ];
     }
 
     public static function displayTabContentForItem(

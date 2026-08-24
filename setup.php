@@ -6,9 +6,10 @@
  * @license GPL-3.0-or-later
  */
 
+use Glpi\Plugin\Hooks;
 use function Safe\define;
 
-define('PLUGIN_TASKPROCEDURE_VERSION', '0.1.0');
+define('PLUGIN_TASKPROCEDURE_VERSION', '0.1.1');
 define('PLUGIN_TASKPROCEDURE_MIN_GLPI', '11.0.0');
 define('PLUGIN_TASKPROCEDURE_MAX_GLPI', '11.0.99');
 
@@ -20,7 +21,10 @@ define('PLUGIN_TASKPROCEDURE_MAX_GLPI', '11.0.99');
  */
 function plugin_init_taskprocedure(): void
 {
-    // Bootstrap only: no runtime integration is enabled yet.
+    global $PLUGIN_HOOKS;
+
+    $PLUGIN_HOOKS[Hooks::PRE_ITIL_INFO_SECTION]['taskprocedure']
+        = 'plugin_taskprocedure_pre_itil_info_section';
 }
 
 function plugin_version_taskprocedure(): array

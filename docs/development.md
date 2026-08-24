@@ -2,7 +2,7 @@
 
 ## Loops
 
-O projeto usa loops incrementais. O Loop 1 entrega somente bootstrap, schema vazio e validações estáticas. A integração de chamado começa no Loop 2; CRUD e execução ficam para loops posteriores.
+O projeto usa loops incrementais. O Loop 2 usa o hook oficial `pre_itil_info_section` para renderizar uma seção vazia no Ticket. CRUD, associação e execução ficam para loops posteriores.
 
 ## Padrões
 

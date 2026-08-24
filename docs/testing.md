@@ -10,4 +10,4 @@ php bin/console glpi:plugin:activate taskprocedure
 php bin/console glpi:plugin:uninstall taskprocedure
 ```
 
-Após a instalação, confirmar no banco a existência das quatro tabelas e que todas estão vazias. A validação do Loop 1 não deve exigir menu, CRUD ou procedimento de exemplo.
+Após a instalação, confirmar no banco a existência das quatro tabelas e que todas estão vazias. Abrir um chamado e confirmar uma única seção **Procedimentos** com a mensagem “Nenhum procedimento associado a este chamado.” Não deve haver menu paralelo, CRUD ou procedimento de exemplo.

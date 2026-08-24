@@ -7,6 +7,23 @@
  * assignments can share the same domain/service layer.
  */
 
+function plugin_taskprocedure_pre_itil_info_section(array $params): void
+{
+    static $rendered = false;
+
+    if ($rendered || !isset($params['item']) || !($params['item'] instanceof Ticket)) {
+        return;
+    }
+
+    $rendered = true;
+    echo '<section class="card card-sm mb-3" aria-labelledby="taskprocedure-section-title">';
+    echo '<div class="card-header"><h2 id="taskprocedure-section-title" class="card-title h4 mb-0">';
+    echo __s('Procedimentos', 'taskprocedure');
+    echo '</h2></div><div class="card-body"><p class="mb-0">';
+    echo __s('Nenhum procedimento associado a este chamado.', 'taskprocedure');
+    echo '</p></div></section>';
+}
+
 function plugin_taskprocedure_install(): bool
 {
     global $DB;

@@ -4,7 +4,7 @@ Plugin para GLPI 11 destinado a procedimentos e checklists reutilizáveis em cha
 
 ## Estado atual
 
-O repositório contém o Loop 1 (bootstrap): metadados compatíveis com GLPI 11, instalação/desinstalação e o schema inicial. A instalação é propositalmente vazia: não há templates, menu, telas ou hooks de Ticket registrados ainda.
+O repositório contém o Loop 2: bootstrap compatível com GLPI 11 e uma seção nativa, vazia e somente leitura dentro de chamados. Ainda não há templates, CRUD, associação ou ações de execução.
 
 ## Instalação de desenvolvimento
 

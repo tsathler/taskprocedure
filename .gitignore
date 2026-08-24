@@ -1,0 +1,14 @@
+# GLPI runtime and local environment files
+files/
+config/
+logs/
+vendor/
+node_modules/
+.env
+.phpunit.result.cache
+
+# Editor and OS files
+.idea/
+.vscode/
+*.swp
+Thumbs.db

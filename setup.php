@@ -10,10 +10,11 @@ use Glpi\Plugin\Hooks;
 use function Safe\define;
 
 require_once __DIR__ . '/src/TicketProcedure.php';
+require_once __DIR__ . '/src/TicketStep.php';
 require_once __DIR__ . '/src/Procedure.php';
 require_once __DIR__ . '/src/ProcedureStep.php';
 
-define('PLUGIN_TASKPROCEDURE_VERSION', '0.2.0');
+define('PLUGIN_TASKPROCEDURE_VERSION', '0.3.0');
 define('PLUGIN_TASKPROCEDURE_MIN_GLPI', '11.0.0');
 define('PLUGIN_TASKPROCEDURE_MAX_GLPI', '11.0.99');
 
@@ -30,6 +31,8 @@ function plugin_init_taskprocedure(): void
     Plugin::registerClass(PluginTaskprocedureTicketProcedure::class, [
         'addtabon' => ['Ticket'],
     ]);
+
+    $PLUGIN_HOOKS['add_javascript']['taskprocedure'] = 'js/taskprocedure.js';
 
     if (Session::haveRight('config', UPDATE)) {
         $PLUGIN_HOOKS['config_page']['taskprocedure'] = 'front/procedure.php';

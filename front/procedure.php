@@ -38,7 +38,7 @@ if (count($rows) === 0) {
 
     $step = new PluginTaskprocedureProcedureStep();
     foreach ($rows as $row) {
-        $steps = $step->count(['plugin_taskprocedure_procedures_id' => $row['id']]);
+        $steps = count($step->find(['plugin_taskprocedure_procedures_id' => $row['id']]));
         $status = ((int) $row['is_active'] === 1)
             ? '<span class="badge bg-green-lt">' . __s('Ativo', 'taskprocedure') . '</span>'
             : '<span class="badge bg-secondary-lt">' . __s('Inativo', 'taskprocedure') . '</span>';

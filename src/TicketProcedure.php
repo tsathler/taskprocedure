@@ -28,7 +28,7 @@ class PluginTaskprocedureTicketProcedure extends CommonDBTM
             __s('Procedimentos', 'taskprocedure'),
             0,
             Ticket::class,
-            'ti ti-list-check',
+            'ti ti-clipboard-check',
         )];
     }
 

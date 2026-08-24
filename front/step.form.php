@@ -22,7 +22,7 @@ if (!$procedure->getFromDB($procedureId)) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    Session::checkCSRFToken();
+    Session::checkCSRF();
 
     if (isset($_POST['delete'])) {
         $step->delete(['id' => $id], true);

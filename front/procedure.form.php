@@ -11,7 +11,7 @@ $procedure = new PluginTaskprocedureProcedure();
 $id = (int) ($_GET['id'] ?? $_POST['id'] ?? 0);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    Session::checkCSRFToken();
+    Session::checkCSRF();
 
     if (isset($_POST['delete'])) {
         $procedure->getFromDB($id);

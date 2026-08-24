@@ -2,7 +2,7 @@
 
 ## Loops
 
-O projeto usa loops incrementais. O Loop 2 usa o hook oficial `pre_itil_info_section` para renderizar uma seção vazia no Ticket. CRUD, associação e execução ficam para loops posteriores.
+O projeto usa loops incrementais. O Loop 2 registra uma aba nativa do itemtype `Ticket` usando `addtabon`, `getTabNameForItem()` e `displayTabContentForItem()`. CRUD, associação e execução ficam para loops posteriores.
 
 ## Padrões
 

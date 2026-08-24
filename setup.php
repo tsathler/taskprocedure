@@ -9,6 +9,8 @@
 use Glpi\Plugin\Hooks;
 use function Safe\define;
 
+require_once __DIR__ . '/src/TicketProcedure.php';
+
 define('PLUGIN_TASKPROCEDURE_VERSION', '0.1.1');
 define('PLUGIN_TASKPROCEDURE_MIN_GLPI', '11.0.0');
 define('PLUGIN_TASKPROCEDURE_MAX_GLPI', '11.0.99');
@@ -23,8 +25,9 @@ function plugin_init_taskprocedure(): void
 {
     global $PLUGIN_HOOKS;
 
-    $PLUGIN_HOOKS[Hooks::PRE_ITIL_INFO_SECTION]['taskprocedure']
-        = 'plugin_taskprocedure_pre_itil_info_section';
+    Plugin::registerClass(PluginTaskprocedureTicketProcedure::class, [
+        'addtabon' => ['Ticket'],
+    ]);
 }
 
 function plugin_version_taskprocedure(): array

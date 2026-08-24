@@ -56,8 +56,21 @@ class PluginTaskprocedureTicketProcedure extends CommonDBTM
 
         $ticketStep = new PluginTaskprocedureTicketStep();
         foreach ($assignments as $assignment) {
-            echo '<div class="border rounded p-3 mb-3"><h4 class="mb-2">'
-                . htmlescape($assignment['procedure_name']) . '</h4><ol class="mb-0">';
+            echo '<div class="border rounded p-3 mb-3"><div class="d-flex justify-content-between">'
+                . '<h4 class="mb-2">' . htmlescape($assignment['procedure_name']) . '</h4>';
+            if ($item->canUpdateItem()) {
+                echo '<form method="post" action="/plugins/taskprocedure/front/ticketprocedure.form.php"'
+                    . ' onsubmit="return confirm(\''
+                    . __s('Remover este procedimento do chamado?', 'taskprocedure') . '\');">'
+                    . '<input type="hidden" name="_glpi_csrf_token" value="'
+                    . htmlescape(Session::getNewCSRFToken()) . '">'
+                    . '<input type="hidden" name="tickets_id" value="' . $ticketId . '">'
+                    . '<input type="hidden" name="ticketprocedure_id" value="'
+                    . (int) $assignment['id'] . '">'
+                    . '<button class="btn btn-sm btn-outline-danger" type="submit" name="delete" value="1">'
+                    . __s('Remover', 'taskprocedure') . '</button></form>';
+            }
+            echo '</div><ol class="mb-0">';
             $steps = $ticketStep->find(
                 ['ticketprocedures_id' => (int) $assignment['id']],
                 ['ORDER' => 'position ASC, id ASC'],

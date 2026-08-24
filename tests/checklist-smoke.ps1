@@ -5,6 +5,15 @@ $ErrorActionPreference = 'Stop'
 Set-Location (Split-Path -Parent $PSScriptRoot)
 Set-Location ../..
 
+$dbPassword = 'glpi-dev-only'
+$envFile = Join-Path (Get-Location) '.env'
+if (Test-Path -LiteralPath $envFile) {
+    $passwordLine = Get-Content -LiteralPath $envFile | Where-Object { $_ -match '^GLPI_DB_PASSWORD=' } | Select-Object -First 1
+    if ($passwordLine -match '^GLPI_DB_PASSWORD=(.*)$') {
+        $dbPassword = $Matches[1].Trim().Trim('"').Trim("'")
+    }
+}
+
 function Invoke-Glpi([string[]]$Arguments) {
     $output = & docker compose exec -T glpi bin/console @Arguments 2>&1
     if ($LASTEXITCODE -ne 0) {
@@ -14,7 +23,7 @@ function Invoke-Glpi([string[]]$Arguments) {
 }
 
 function Invoke-Sql([string]$Query) {
-    $output = & docker compose exec -T db mariadb -uglpi -pglpi-dev-only glpi -Nse $Query 2>&1
+    $output = & docker compose exec -T db mariadb -uglpi "-p$dbPassword" glpi -Nse $Query 2>&1
     if ($LASTEXITCODE -ne 0) {
         throw "Consulta SQL falhou: $Query`n$output"
     }

@@ -4,7 +4,7 @@ Plugin para GLPI 11 destinado a procedimentos e checklists reutilizáveis em cha
 
 ## Estado atual
 
-O repositório contém o Loop 2: bootstrap compatível com GLPI 11 e uma aba nativa, vazia e somente leitura dentro de chamados. Ainda não há templates, CRUD, associação ou ações de execução.
+O repositório contém o CRUD administrativo de procedimentos e etapas, além da aba nativa no Ticket. Associação e execução do checklist ainda serão implementadas nos próximos loops.
 
 ## Instalação de desenvolvimento
 

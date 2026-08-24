@@ -14,7 +14,11 @@ $procedureId = (int) ($_GET['procedure_id'] ?? $_POST['plugin_taskprocedure_proc
 if ($id > 0 && !$step->getFromDB($id)) {
     Html::displayErrorAndDie(__s('Etapa não encontrada.', 'taskprocedure'));
 }
-$procedureId = $procedureId ?: (int) ($step->fields['plugin_taskprocedure_procedures_id'] ?? 0);
+if ($id > 0) {
+    // The parent procedure is immutable while editing a step. Do not trust a
+    // submitted or query-string ID to re-parent an existing record.
+    $procedureId = (int) $step->fields['plugin_taskprocedure_procedures_id'];
+}
 
 $procedure = new PluginTaskprocedureProcedure();
 if (!$procedure->getFromDB($procedureId)) {

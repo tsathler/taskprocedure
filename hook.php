@@ -68,6 +68,8 @@ function plugin_taskprocedure_install(): bool
                 `is_completed` tinyint NOT NULL DEFAULT 0,
                 `completed_by` int {$keySign} NOT NULL DEFAULT 0,
                 `completed_at` timestamp NULL DEFAULT NULL,
+                `comment` text DEFAULT NULL,
+                `evidence` text DEFAULT NULL,
                 `date_creation` timestamp NULL DEFAULT NULL,
                 `date_mod` timestamp NULL DEFAULT NULL,
                 PRIMARY KEY (`id`),
@@ -75,10 +77,38 @@ function plugin_taskprocedure_install(): bool
                 KEY `is_completed` (`is_completed`)
             ) ENGINE=InnoDB DEFAULT CHARSET={$charset} COLLATE={$collation} ROW_FORMAT=DYNAMIC;
         ",
+        'glpi_plugin_taskprocedure_step_logs' => "
+            CREATE TABLE `glpi_plugin_taskprocedure_step_logs` (
+                `id` int {$keySign} NOT NULL AUTO_INCREMENT,
+                `ticketsteps_id` int {$keySign} NOT NULL,
+                `ticketprocedures_id` int {$keySign} NOT NULL,
+                `tickets_id` int {$keySign} NOT NULL,
+                `users_id` int {$keySign} NOT NULL DEFAULT 0,
+                `action` varchar(32) NOT NULL,
+                `old_value` text DEFAULT NULL,
+                `new_value` text DEFAULT NULL,
+                `date_creation` timestamp NULL DEFAULT NULL,
+                PRIMARY KEY (`id`),
+                KEY `ticketstep_id` (`ticketsteps_id`),
+                KEY `ticket_id` (`tickets_id`),
+                KEY `date_creation` (`date_creation`)
+            ) ENGINE=InnoDB DEFAULT CHARSET={$charset} COLLATE={$collation} ROW_FORMAT=DYNAMIC;
+        ",
     ];
 
     foreach ($tables as $table => $query) {
         if (!$DB->tableExists($table) && !$DB->doQuery($query)) {
+            return false;
+        }
+    }
+
+    if ($DB->tableExists('glpi_plugin_taskprocedure_ticketsteps')) {
+        if (!$DB->fieldExists('glpi_plugin_taskprocedure_ticketsteps', 'comment')
+            && !$DB->doQuery("ALTER TABLE `glpi_plugin_taskprocedure_ticketsteps` ADD `comment` text DEFAULT NULL")) {
+            return false;
+        }
+        if (!$DB->fieldExists('glpi_plugin_taskprocedure_ticketsteps', 'evidence')
+            && !$DB->doQuery("ALTER TABLE `glpi_plugin_taskprocedure_ticketsteps` ADD `evidence` text DEFAULT NULL")) {
             return false;
         }
     }
@@ -94,6 +124,7 @@ function plugin_taskprocedure_uninstall(): bool
     global $DB;
 
     $tables = [
+        'glpi_plugin_taskprocedure_step_logs',
         'glpi_plugin_taskprocedure_ticketsteps',
         'glpi_plugin_taskprocedure_ticketprocedures',
         'glpi_plugin_taskprocedure_steps',
